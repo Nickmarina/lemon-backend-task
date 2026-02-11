@@ -17,6 +17,10 @@ describe('Developers API tests examples', () => {
 			expect(developer).toHaveProperty('firstName')
 			expect(developer).toHaveProperty('lastName')
 			expect(developer).toHaveProperty('email')
+
+			if (developer.revenue) {
+				expect(typeof developer.revenue).toBe('number');
+			}
 		}
 
 	})

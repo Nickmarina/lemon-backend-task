@@ -1,14 +1,15 @@
 import 'reflect-metadata'
+import path from 'node:path'
 import express from 'express'
 import bodyParser from 'body-parser'
 import { InversifyExpressServer } from 'inversify-express-utils'
-import { createContainer } from './container/container'
 import * as swagger from 'swagger-express-ts'
-import { generalDoc } from './rest/swagger/general.docs'
 import { engine } from 'express-handlebars';
-import path from 'node:path'
-import { Express } from 'express-serve-static-core'
 import { Container, interfaces } from 'inversify'
+import { Express } from 'express-serve-static-core'
+
+import { createContainer } from './container/container'
+import { generalDoc } from './rest/swagger/general.docs'
 
 export class Application {
 

@@ -3,7 +3,7 @@
 // **************************************************************************
 
 import { injectable } from 'inversify';
-import { IDeveloper } from '../types'
+import { IDeveloper, IContract } from '../types'
 import { contracts, developers } from './data'
 
 @injectable()
@@ -17,7 +17,7 @@ export class DevelopersRepository {
 		return developers.find(d => d.id === id)
 	}
 
-	async getContracts(){
+	async getContracts(): Promise<IContract[]>{
 		return contracts
 	}
 
