@@ -3,12 +3,13 @@ import {inject, injectable} from 'inversify';
 import {DevelopersRepository} from '../repositories/developers.repository';
 import {checkDevelopersRevenue} from "../../../utils/checkDevelopersRevenue";
 import {IDeveloperWithCheckedRevenue} from '../types'
+import { Types } from '../../../constants'
 
 @injectable()
 export class DevelopersService {
 
 	constructor(
-		@inject('DevelopersRepository') private developersRepository: DevelopersRepository,
+		@inject(Types.DEVELOPERS_REPOSITORY) private developersRepository: DevelopersRepository,
 	) {}
 
 	async getDevelopers(): Promise<IDeveloperWithCheckedRevenue[]>{

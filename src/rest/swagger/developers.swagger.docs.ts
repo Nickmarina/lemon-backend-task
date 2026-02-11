@@ -14,7 +14,7 @@ export const getDevelopers: IApiOperationArgsBase = {
 	responses: {
 		200: {
 			description: 'Success',
-			type: 'array', model: 'DeveloperDto'
+			type: 'array', model: 'DeveloperListDto'
 		},
 	},
 }

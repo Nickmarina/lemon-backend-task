@@ -11,19 +11,20 @@ import {
 import { inject } from 'inversify'
 
 import { DevelopersService } from '../../domain/developers/services/developers.service'
-import { DeveloperDto } from '../dto/developers.responses.dto'
+import { DeveloperDto, DeveloperListDto } from '../dto/developers.responses.dto'
+import { Types } from '../../constants'
 
 @controller('/api/developers')
 @ApiPath(path)
 export class DevelopersController extends BaseHttpController implements interfaces.Controller {
 
 	constructor(
-		@inject('DevelopersService') private developersService: DevelopersService,
+		@inject(Types.DEVELOPERS_SERVICE) private developersService: DevelopersService,
 	){ super() }
 
 	@httpGet('/')
 	@ApiOperationGet(getDevelopers)
-	public async getDevelopers(): Promise<DeveloperDto[]> {
+	public async getDevelopers(): Promise<DeveloperListDto[]> {
 		return this.developersService.getDevelopers()
 	}
 

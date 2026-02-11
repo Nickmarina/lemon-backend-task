@@ -11,6 +11,12 @@ import { Express } from 'express-serve-static-core'
 import { createContainer } from './container/container'
 import { generalDoc } from './rest/swagger/general.docs'
 
+import {
+	BODY_PARSER_LIMIT,
+	VIEW_404,
+	ERROR_INTERNAL_SERVER,
+} from './constants'
+
 export class Application {
 
 	private expressApp: Express
@@ -40,8 +46,8 @@ export class Application {
 			next()
 		})
 
-		app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
-		app.use(bodyParser.json({ limit: '50mb' }))
+		app.use(bodyParser.urlencoded({ extended: true, limit: BODY_PARSER_LIMIT }))
+		app.use(bodyParser.json({ limit: BODY_PARSER_LIMIT }))
 		app.engine('handlebars', engine());
 		app.set('view engine', 'handlebars');
 		app.set('views', path.resolve(__dirname + '/views'));
@@ -65,7 +71,7 @@ export class Application {
 
 					res.status(e.statusCode || 500).json({
 						error: {
-							name: e.name || 'Internal server error',
+							name: e.name || ERROR_INTERNAL_SERVER,
 							message: e.message,
 							stack: e.stack,
 							payload: e.payload,
@@ -77,7 +83,7 @@ export class Application {
 			.build()
 
 		app.get('*', (_req, res) => {
-			res.render('404')
+			res.render(VIEW_404)
 		})
 
 		this.expressApp = app

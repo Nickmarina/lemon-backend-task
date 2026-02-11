@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 import { DevelopersService } from '../domain/developers/services/developers.service'
 import { DevelopersRepository } from '../domain/developers/repositories/developers.repository'
+import { Types } from '../constants'
 
 // REST API Controllers
 import '../rest/controllers/developers.controller'
@@ -15,10 +16,10 @@ export const createContainer = (options: ICreateContainerOptions = {}) => {
 	let container = new Container()
 
 	// Services
-	container.bind<DevelopersService>('DevelopersService').to(DevelopersService)
+	container.bind<DevelopersService>(Types.DEVELOPERS_SERVICE).to(DevelopersService)
 
 	// Repositories
-	container.bind<DevelopersRepository>('DevelopersRepository').to(DevelopersRepository)
+	container.bind<DevelopersRepository>(Types.DEVELOPERS_REPOSITORY).to(DevelopersRepository)
 
 	for( const serviceIdentifier of ( _.keys(options.overrides) ) ){
 		if( container.isBound(serviceIdentifier) ){

@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import { request } from './setup/shortcuts'
 import { createRequestWithContainerOverrides } from './setup/helpers'
 import { DevelopersRepository } from '../src/domain/developers/repositories/developers.repository'
+import { Types } from '../src/constants'
 
 describe('Developers API tests examples', () => {
 
@@ -17,10 +18,7 @@ describe('Developers API tests examples', () => {
 			expect(developer).toHaveProperty('firstName')
 			expect(developer).toHaveProperty('lastName')
 			expect(developer).toHaveProperty('email')
-
-			if (developer.revenue) {
-				expect(typeof developer.revenue).toBe('number');
-			}
+			expect(['number', 'object']).toContain(typeof developer.revenue);
 		}
 
 	})
@@ -28,7 +26,7 @@ describe('Developers API tests examples', () => {
 	it('should BAT get developer by id (mocked repository used)', async () => {
 
 		const req = await createRequestWithContainerOverrides({
-			'DevelopersRepository': {
+			[Types.DEVELOPERS_REPOSITORY]: {
 				toConstantValue: {
 					getDeveloperById: async (_id) => ({
 						"id": "65de346c255f31cb84bd10e9",

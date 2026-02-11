@@ -1,3 +1,5 @@
+export type TContractStatus = 'pending' | 'completed' | 'ongoing';
+
 export interface IDeveloper {
 	id: string;
 	firstName?: string;
@@ -8,10 +10,10 @@ export interface IDeveloper {
 export interface IContract {
 	id: number;
 	developerId: string;
-	status: string;
+	status: TContractStatus;
 	amount: number;
 }
 
 export interface IDeveloperWithCheckedRevenue extends IDeveloper {
-	revenue?: number;
+	revenue: number | null;
 }
